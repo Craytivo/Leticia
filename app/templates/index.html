@@ -3,32 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A presentation and question space for Leticia Ngwenya, Lawyer, focused on women's legal rights within marriage in British Columbia.">
+<meta name="description" content="Leticia Ngwenya, Lawyer — a presentation and question space focused on women's legal rights within marriage in British Columbia.">
 <title>Leticia Ngwenya | Women's Legal Rights Within Marriage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script defer src="{{ url_for('static', filename='js/form.js') }}"></script>
 </head>
 <body>
 <header class="site-header">
 <a class="brand" href="/" aria-label="Leticia Ngwenya home"><span class="brand-name">LETICIA NGWENYA</span><span class="brand-role">LAWYER</span></a>
-<a class="nav-cta" href="#ask">Ask a Question</a>
+<nav><a class="nav-link" href="#topics">Topics</a><a class="nav-cta" href="#ask">Ask a Question</a></nav>
 </header>
 <main>
 <section class="hero">
 <div class="hero-copy">
 <p class="eyebrow">A conversation about women's legal rights</p>
 <h1>Know your rights<br><em>within marriage.</em></h1>
-<p class="hero-text">A practical space to learn, ask questions, and better understand the legal rights and responsibilities that can arise within marriage in British Columbia.</p>
+<p class="hero-text">A practical space to learn, ask questions, and better understand legal rights and responsibilities that can arise within marriage in British Columbia.</p>
 <a class="button" href="#ask">Ask a Question <span aria-hidden="true">→</span></a>
+<p class="hero-note">Questions may be submitted anonymously.</p>
 </div>
 <div class="hero-mark" aria-hidden="true"><span>LN</span></div>
 </section>
+
 <section class="intro section-shell" id="about">
 <div class="section-label">The conversation</div>
-<div><h2>Clear information.<br>Real questions.</h2><p>This presentation creates a space for women to explore questions about their legal rights within marriage and to better understand the issues that may affect them.</p><p>Have a question you would like Leticia to address? You can submit it privately below.</p></div>
+<div><h2>Clear information.<br>Real questions.</h2><p>This presentation creates a space for women to explore questions about their legal rights within marriage and to better understand issues that may affect them.</p><p>You can submit a question privately for Leticia to review and address.</p></div>
 </section>
+
 <section class="topics section-shell" id="topics">
 <div class="section-label">Areas of discussion</div>
 <div class="topic-grid">
@@ -38,10 +42,58 @@
 <article><span>04</span><h3>Separation &amp; family matters</h3><p>Legal considerations when a marriage changes or ends.</p></article>
 </div>
 </section>
+
 <section class="ask section-shell" id="ask">
-<div class="ask-card"><div class="section-label">Your question</div><h2>What would you like to ask?</h2><p class="ask-lead">Questions can be submitted anonymously or with your contact information if you would like a response from Leticia.</p><div class="form-placeholder" role="status"><p><strong>Question form coming next.</strong></p><p>The V1 landing page is now in place. The submission form, email confirmation and organized question tracking will be added in the next build step.</p></div></div>
+<div class="ask-card">
+<div class="section-label">Your question</div>
+<h2>Ask Leticia.</h2>
+<p class="ask-lead">Choose a topic, tell us what you would like to know, and decide whether you would like a response.</p>
+<form id="question-form" class="question-form" novalidate>
+<div class="field">
+<label for="topic">What is your question about? <span aria-hidden="true">*</span></label>
+<select id="topic" name="topic" required>
+<option value="">Select a topic</option>
+<option>Marriage &amp; Legal Rights</option>
+<option>Finances &amp; Property</option>
+<option>Spousal Rights &amp; Responsibilities</option>
+<option>Separation</option>
+<option>Children &amp; Family</option>
+<option>Other</option>
+</select>
+<p class="field-error" data-error-for="topic"></p>
+</div>
+<div class="field">
+<label for="situation">Which best describes your situation? <span class="optional">Optional</span></label>
+<select id="situation" name="situation">
+<option value="">Prefer not to say</option>
+<option>Currently married</option>
+<option>Considering separation</option>
+<option>Separated</option>
+<option>Divorced</option>
+<option>Other</option>
+</select>
+</div>
+<div class="field">
+<label for="question">What would you like to ask? <span aria-hidden="true">*</span></label>
+<textarea id="question" name="question" rows="7" maxlength="3000" required placeholder="Write your question here..."></textarea>
+<div class="field-meta"><p class="field-error" data-error-for="question"></p><span id="question-count">0 / 3000</span></div>
+</div>
+<fieldset class="field choice-field">
+<legend>Would you like Leticia to respond?</legend>
+<label class="choice"><input type="radio" name="response_preference" value="contact" checked><span><strong>Yes, I'd like a response</strong><small>We'll ask for your name and email.</small></span></label>
+<label class="choice"><input type="radio" name="response_preference" value="anonymous"><span><strong>I'd prefer to remain anonymous</strong><small>No name or email is required.</small></span></label>
+</fieldset>
+<div id="contact-fields" class="contact-fields">
+<div class="field"><label for="name">First name <span aria-hidden="true">*</span></label><input id="name" name="name" autocomplete="given-name" maxlength="80"><p class="field-error" data-error-for="name"></p></div>
+<div class="field"><label for="email">Email address <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com"><p class="field-error" data-error-for="email"></p></div>
+</div>
+<div class="privacy-box"><label class="checkbox"><input id="privacy" name="privacy" type="checkbox" required><span>I understand that submitting a question does not by itself create a lawyer-client relationship.</span></label><p class="field-error" data-error-for="privacy"></p></div>
+<div class="sensitive-note">Please do not include passwords, banking credentials, government identification numbers, or other highly sensitive information that is not necessary to ask your question.</div>
+<button class="button submit-button" type="submit">Send My Question <span aria-hidden="true">→</span></button>
+<p class="form-message" id="form-message" role="alert" aria-live="polite"></p>
+</form>
+</div>
 </section>
-<section class="note section-shell"><p><strong>A note about your information</strong></p><p>Please do not include passwords, banking credentials, government identification numbers, or other highly sensitive information that is not necessary to ask your question. Final privacy and legal language will be reviewed by Leticia before launch.</p></section>
 </main>
 <footer class="site-footer"><span>LETICIA NGWENYA · LAWYER</span><span>British Columbia, Canada</span></footer>
 </body>
