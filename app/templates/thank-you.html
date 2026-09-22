@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question received | Leticia Ngwenya</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+<header class="site-header"><a class="brand" href="/" aria-label="Leticia Ngwenya home"><span class="brand-name">LETICIA NGWENYA</span><span class="brand-role">LAWYER</span></a></header>
+<main>
+<section class="success-page section-shell">
+<div class="section-label">Thank you</div>
+<h1>Question received.</h1>
+<p class="success-lead">Your question has been recorded and will be reviewed by Leticia.</p>
+<div class="success-card"><p class="success-label">Question ID</p><strong id="question-id">—</strong><p id="response-note"></p></div>
+<p class="sensitive-note">Submitting a question does not by itself create a lawyer-client relationship. Please seek independent legal advice where appropriate.</p>
+<a class="button" href="/">Return home <span aria-hidden="true">→</span></a>
+</section>
+</main>
+<script>
+const p=new URLSearchParams(location.search);
+document.getElementById("question-id").textContent=p.get("id")||"Received";
+document.getElementById("response-note").textContent=p.get("response")==="contact"
+?"Leticia will use the contact information you provided if a response is appropriate."
+:"Your question was submitted without contact information.";
+</script>
+</body>
+</html>
