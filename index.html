@@ -22,8 +22,10 @@
     <a href="#learn">What you'll learn</a>
     <a href="#dower">The Dower Act</a>
     <a href="#checklist">Checklist</a>
+    <a class="nav-email" href="mailto:leticiatalkslaw@gmail.com?subject=Leticia%20Talks%20Law%20Question">Email Leticia</a>
     <a class="nav-cta" href="#help">Where to get help <span>↗</span></a>
   </nav>
+  <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
 </header>
 
 <main id="top">
@@ -34,7 +36,7 @@
     <p class="hero-copy">An accessible introduction to Alberta's Dower Act and the protections that may apply when your spouse owns the family home.</p>
     <div class="hero-actions">
       <a class="button button-red" href="#learn">Start the workshop <span>↓</span></a>
-      <a class="text-link" href="#disclaimer">Read the legal disclaimer</a>
+      <a class="text-link" href="mailto:leticiatalkslaw@gmail.com?subject=Leticia%20Talks%20Law%20Question">Questions? Email Leticia ↗</a>
     </div>
   </div>
   <div class="hero-brand reveal delay-2" aria-label="Leticia Talks Law">
@@ -153,6 +155,10 @@
       <div class="reveal"><h2>Bring the right questions to the right person.</h2><p>If you are dealing with a sale, mortgage, separation, divorce, death of a spouse, or possible violation of your rights, consider speaking with a qualified Alberta legal professional.</p></div>
       <div class="questions reveal delay-1"><p><span>01</span> Who is on the title?</p><p><span>02</span> Are we legally married?</p><p><span>03</span> Have we lived in the property?</p><p><span>04</span> What documents have I signed?</p><p><span>05</span> Has the property already been sold, mortgaged or transferred?</p><p><span>06</span> What do I want to understand or protect?</p></div>
     </div>
+    <a class="contact-card reveal delay-2" href="mailto:leticiatalkslaw@gmail.com?subject=Leticia%20Talks%20Law%20Question">
+      <span class="contact-icon" aria-hidden="true">↗</span>
+      <span><small>QUESTIONS &amp; FOLLOW-UPS</small><strong>leticiatalkslaw@gmail.com</strong><em>Tap to email Leticia Talks Law</em></span>
+    </a>
   </div>
 </section>
 
@@ -168,11 +174,18 @@
 </section>
 </main>
 
+<a class="back-top" href="#top" aria-label="Back to top">↑</a>
+<a class="mobile-contact" href="mailto:leticiatalkslaw@gmail.com?subject=Leticia%20Talks%20Law%20Question">
+  <span>Questions or follow-ups?</span><strong>Email Leticia ↗</strong>
+</a>
+
 <script>
 (function () {
   const header = document.querySelector('.site-header');
   const nav = document.querySelector('#site-nav');
   const menuButton = document.querySelector('.menu-toggle');
+  const progressBar = document.querySelector('#reading-progress-bar');
+  const backTop = document.querySelector('.back-top');
 
   function setHeaderOffset() {
     document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
@@ -180,6 +193,17 @@
 
   setHeaderOffset();
   window.addEventListener('resize', setHeaderOffset, { passive: true });
+
+  function updateScrollUI() {
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    if (progressBar) progressBar.style.width = progress + '%';
+    if (backTop) backTop.classList.toggle('visible', window.scrollY > 500);
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  }
+  updateScrollUI();
+  window.addEventListener('scroll', updateScrollUI, { passive: true });
 
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
     link.addEventListener('click', function (event) {
@@ -199,6 +223,20 @@
       menuButton.setAttribute('aria-expanded', String(isOpen));
     });
   }
+
+  document.addEventListener('click', function (event) {
+    if (!nav.contains(event.target) && !menuButton.contains(event.target)) {
+      nav.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      nav.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }
+  });
 
   const revealItems = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
